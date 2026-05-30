@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>newiracraft — Mobile Apps & Digital Products</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0e0d;
+      --cream: #f5f0e8;
+      --warm: #faf8f4;
+      --accent: #c8502a;
+      --accent-pale: #f0e0d8;
+      --muted: #6b6560;
+      --border: #e0d8ce;
+      --display: 'DM Serif Display', Georgia, serif;
+      --body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      background: var(--warm);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(250,248,244,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+
+    /* ── SECTIONS ── */
+    section {
+      scroll-margin-top: 64px;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── HERO ── */
+    #home {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -120px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-pale) 0%, transparent 68%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    #home::after {
+      content: 'newiracraft';
+      position: absolute;
+      bottom: -40px; right: -20px;
+      font-family: var(--display);
+      font-size: clamp(80px, 14vw, 180px);
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 100px 40px;
+      max-width: 1060px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .hero-inner h1 {
+      font-family: var(--display);
+      font-size: clamp(3.2rem, 7.5vw, 6rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .hero-inner h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      max-width: 500px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 34px;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+
+    .btn-ghost:hover {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    /* ── VALUES ── */
+    #home .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .val {
+      background: var(--warm);
+      padding: 40px 32px;
+    }
+
+    .val-sym {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .val h3 {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .val p { font-size: 0.9rem; color: var(--muted); }
+
+    /* ── SECTION SHARED ── */
+    .section-hero {
+      padding: 72px 0 50px;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+
+    .section-hero h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .section-hero p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* ── APPS ── */
+    #apps .apps-body {
+      padding: 72px 0;
+    }
+
+    .app-card {
+      display: flex;
+      gap: 44px;
+      align-items: flex-start;
+      padding: 48px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: #fff;
+      max-width: 760px;
+    }
+
+    .app-icon {
+      width: 78px;
+      height: 78px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .app-info h3 {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      margin-bottom: 4px;
+    }
+
+    .app-tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .app-info p { font-size: 0.93rem; color: var(--muted); line-height: 1.75; margin-bottom: 22px; }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-radius: 20px;
+    }
+
+    /* ── SUPPORT ── */
+    #support .support-body {
+      padding: 72px 0;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .support-col h3 {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      margin-bottom: 14px;
+    }
+
+    .support-col > p { font-size: 0.93rem; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+
+    .contact-list { border-top: 1px solid var(--border); margin-top: 36px; }
+    .contact-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .clabel { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); display: block; margin-bottom: 3px; }
+    .contact-item a { font-size: 0.93rem; color: var(--ink); }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+    details.faq {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    details.faq summary {
+      padding: 16px 20px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after { content: '+'; font-size: 1.1rem; color: var(--muted); }
+    details.faq[open] summary::after { content: '−'; }
+
+    details.faq .faq-body {
+      padding: 0 20px 18px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.78;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    /* ── DOCS (Privacy & Terms) ── */
+    .doc-body { padding: 72px 0; }
+
+    .doc-wrap { max-width: 740px; }
+
+    .doc-intro {
+      padding: 28px 30px;
+      background: var(--cream);
+      border-left: 3px solid var(--accent);
+      margin-bottom: 48px;
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .doc-intro p + p { margin-top: 10px; }
+
+    .doc-sec {
+      margin-bottom: 44px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-sec:last-child { border-bottom: none; }
+
+    .doc-sec h3 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      color: var(--ink);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-sec h4 {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 20px 0 8px;
+    }
+
+    .doc-sec p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.82;
+      margin-bottom: 12px;
+    }
+
+    .doc-sec ul {
+      padding-left: 20px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.82;
+    }
+
+    .doc-sec ul li { margin-bottom: 6px; }
+
+    .contact-block {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 22px 26px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 2;
+      border-radius: 2px;
+      margin-top: 14px;
+    }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cta-strip .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-strip p { font-size: 1rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 52px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      text-align: center;
+    }
+
+    .footer-inner .logo { color: var(--cream); font-size: 1.1rem; font-family: var(--display); }
+
+    .footer-nav { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; }
+
+    .footer-nav a {
+      font-size: 0.82rem;
+      color: rgba(245,240,232,0.55);
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: var(--cream); text-decoration: none; }
+
+    .footer-copy { font-size: 0.75rem; color: rgba(245,240,232,0.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .hero-inner { padding: 60px 20px; }
+      #home .values { grid-template-columns: 1fr; }
+      .app-card { flex-direction: column; gap: 20px; padding: 28px 20px; }
+      .support-grid { grid-template-columns: 1fr; gap: 44px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════════ -->
+<nav class="nav">
+  <span class="logo">newiracraft</span>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#apps">Apps</a>
+    <a href="#support">Support</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#terms">Terms</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════
+     HOME
+═══════════════════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-inner">
+    <p class="eyebrow">Independent App Studio · Brisbane, AU</p>
+    <h1>Apps built for<br><em>real people.</em></h1>
+    <p class="hero-sub">newiracraft creates mobile and web apps that make everyday tasks smarter, simpler, and more enjoyable — powered by AI.</p>
+    <a href="#apps" class="btn">See Our Apps</a>
+  </div>
+
+  <div class="values" style="margin-top: 0;">
+    <div class="val">
+      <span class="val-sym">✦</span>
+      <h3>Independent</h3>
+      <p>A small studio with focused intent — no bloat, no corporate slowdown.</p>
+    </div>
+    <div class="val">
+      <span class="val-sym">◈</span>
+      <h3>AI-Enhanced</h3>
+      <p>Every product is thoughtfully powered by AI to save you time and effort.</p>
+    </div>
+    <div class="val">
+      <span class="val-sym">◉</span>
+      <h3>Privacy First</h3>
+      <p>We collect only what's needed. Your data stays yours.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     APPS
+═══════════════════════════════════════════════════ -->
+<section id="apps">
+  <div class="section-hero">
+    <div class="container">
+      <h2>Our Apps</h2>
+      <p>Thoughtfully built tools for everyday life.</p>
+    </div>
+  </div>
+
+  <div class="apps-body">
+    <div class="container">
+      <div class="app-card">
+        <div class="app-icon">✍</div>
+        <div class="app-info">
+          <h3>PostEasy</h3>
+          <p class="app-tag">AI Review Writing &amp; Publisher</p>
+          <p>Write better reviews in seconds. PostEasy uses AI to enhance your drafts, predict star ratings, and help you share feedback across multiple platforms — all from one app.</p>
+          <span class="badge">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <div class="container">
+      <p>Questions about our apps or data practices?</p>
+      <a href="#support" class="btn btn-ghost">Contact Support</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     SUPPORT
+═══════════════════════════════════════════════════ -->
+<section id="support">
+  <div class="section-hero">
+    <div class="container">
+      <h2>Support</h2>
+      <p>We're here to help. We'll get back to you within 1–2 business days.</p>
+    </div>
+  </div>
+
+  <div class="support-body">
+    <div class="container">
+      <div class="support-grid">
+
+        <div class="support-col">
+          <h3>Get in Touch</h3>
+          <p>For help with any of our apps, billing questions, account issues, or feedback — email us directly.</p>
+          <a href="mailto:support@newiracraft.com" class="btn">Email Support</a>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <span class="clabel">General Support</span>
+              <a href="mailto:support@newiracraft.com">support@newiracraft.com</a>
+            </div>
+            <div class="contact-item">
+              <span class="clabel">Privacy Enquiries</span>
+              <a href="mailto:privacy@newiracraft.com">privacy@newiracraft.com</a>
+            </div>
+            <div class="contact-item">
+              <span class="clabel">Legal / Terms</span>
+              <a href="mailto:legal@newiracraft.com">legal@newiracraft.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="support-col">
+          <h3>Common Questions</h3>
+          <div class="faq-list">
+
+            <details class="faq">
+              <summary>How do I cancel my subscription?</summary>
+              <div class="faq-body">Subscriptions are managed through Apple App Store or Google Play. Open your device's subscription settings, find the app, and tap Cancel Subscription. Cancellation takes effect at the end of the current billing period.</div>
+            </details>
+
+            <details class="faq">
+              <summary>How do I delete my account and data?</summary>
+              <div class="faq-body">Email us at <a href="mailto:support@newiracraft.com">support@newiracraft.com</a> with the subject "Delete My Account" from your registered email. We'll complete the deletion within 30 days.</div>
+            </details>
+
+            <details class="faq">
+              <summary>The app isn't working — what should I do?</summary>
+              <div class="faq-body">Try closing and reopening the app. If issues persist, make sure you're on the latest version from the App Store or Play Store. Still not working? Email us with your device model and OS version.</div>
+            </details>
+
+            <details class="faq">
+              <summary>Can I request a refund?</summary>
+              <div class="faq-body">Refunds are handled by Apple or Google depending on where you purchased. Visit Apple's Report a Problem page or Google Play's refund support page to submit a request.</div>
+            </details>
+
+            <details class="faq">
+              <summary>Is my data private?</summary>
+              <div class="faq-body">Yes. We collect only what's needed to run the service and never sell your data. Read our full <a href="#privacy">Privacy Policy</a> for details.</div>
+            </details>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     PRIVACY POLICY
+═══════════════════════════════════════════════════ -->
+<section id="privacy">
+  <div class="section-hero">
+    <div class="container">
+      <h2>Privacy Policy</h2>
+      <p>Last updated: 1 June 2025</p>
+    </div>
+  </div>
+
+  <div class="doc-body">
+    <div class="container">
+      <div class="doc-wrap">
+
+        <div class="doc-intro">
+          <p>newiracraft ("we", "us", or "our") operates mobile and web applications including PostEasy and other products. This Privacy Policy explains how we collect, use, disclose, and protect your information when you use our apps and services.</p>
+          <p>By using our apps, you agree to the practices described in this policy. If you do not agree, please discontinue use.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>1. Information We Collect</h3>
+          <h4>1.1 Information You Provide</h4>
+          <ul>
+            <li><strong>Account information:</strong> Name, email address, and password when you create an account.</li>
+            <li><strong>User-generated content:</strong> Reviews, drafts, and text you enter into our apps.</li>
+            <li><strong>Communications:</strong> Messages you send us via support or feedback forms.</li>
+          </ul>
+          <h4>1.2 Information Collected Automatically</h4>
+          <ul>
+            <li><strong>Usage data:</strong> Features used, session duration, in-app actions, and crash reports.</li>
+            <li><strong>Device information:</strong> Device type, operating system version, unique identifiers, and app version.</li>
+            <li><strong>Log data:</strong> IP address, access times, and screens viewed.</li>
+          </ul>
+          <h4>1.3 Information From Third Parties</h4>
+          <ul>
+            <li><strong>Authentication providers:</strong> If you sign in via Google or Apple, we receive your name and email from those providers.</li>
+            <li><strong>Payment processors:</strong> Subscription payments are handled by Apple App Store or Google Play. We do not store your payment card details.</li>
+          </ul>
+        </div>
+
+        <div class="doc-sec">
+          <h3>2. How We Use Your Information</h3>
+          <p>We use your information to:</p>
+          <ul>
+            <li>Provide, operate, and improve our apps and services.</li>
+            <li>Process and fulfil your subscription.</li>
+            <li>Send service-related emails (e.g. receipts, security alerts). We do not send marketing emails without your explicit consent.</li>
+            <li>Respond to your support requests.</li>
+            <li>Monitor and analyse usage to improve user experience.</li>
+            <li>Detect, investigate, and prevent fraudulent or illegal activity.</li>
+            <li>Comply with legal obligations.</li>
+          </ul>
+        </div>
+
+        <div class="doc-sec">
+          <h3>3. AI Processing</h3>
+          <p>Some of our apps use AI services (such as Google Gemini) to process text you submit — for example, to enhance review drafts. Text submitted for AI processing may be sent to third-party AI providers under their respective privacy policies. We do not use your content to train AI models without explicit consent. You should not submit sensitive personal information through AI-powered features.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>4. Sharing of Information</h3>
+          <p>We do not sell your personal information. We may share information with:</p>
+          <ul>
+            <li><strong>Service providers:</strong> Trusted third parties assisting us in operating our services (e.g. cloud hosting, analytics, AI APIs), bound by confidentiality agreements.</li>
+            <li><strong>Legal requirements:</strong> Where required by law, court order, or government authority.</li>
+            <li><strong>Business transfers:</strong> In connection with a merger, acquisition, or sale of assets, with notice to you.</li>
+            <li><strong>With your consent:</strong> For any other purpose disclosed at the time of collection.</li>
+          </ul>
+        </div>
+
+        <div class="doc-sec">
+          <h3>5. Data Retention</h3>
+          <p>We retain your personal information for as long as your account is active or as needed to provide services. You may request deletion of your account and associated data at any time by contacting us below. We will action deletion requests within 30 days, except where retention is required by law.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>6. Security</h3>
+          <p>We implement appropriate technical and organisational measures to protect your information against unauthorised access, alteration, disclosure, or destruction. No internet transmission or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>7. Children's Privacy</h3>
+          <p>Our apps are not directed at children under the age of 13 (or 16 where required by local law). We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately and we will delete it.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>8. Your Rights</h3>
+          <p>Depending on your location, you may have rights including: access to your personal data, correction of inaccurate data, deletion ("right to be forgotten"), data portability, and objection to certain processing. To exercise these rights, contact us at <a href="mailto:privacy@newiracraft.com">privacy@newiracraft.com</a>.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>9. Cookies &amp; Tracking</h3>
+          <p>Our web services may use cookies and similar technologies for authentication and analytics. You can control cookie settings through your browser. Disabling cookies may affect some functionality.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>10. Changes to This Policy</h3>
+          <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the date at the top of this page and, where appropriate, by in-app notification. Continued use after changes constitutes acceptance.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>11. Contact Us</h3>
+          <div class="contact-block">
+            <strong>newiracraft</strong><br>
+            Brisbane, Queensland, Australia<br>
+            Email: <a href="mailto:privacy@newiracraft.com">privacy@newiracraft.com</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     TERMS OF SERVICE
+═══════════════════════════════════════════════════ -->
+<section id="terms">
+  <div class="section-hero">
+    <div class="container">
+      <h2>Terms of Service</h2>
+      <p>Last updated: 1 June 2025</p>
+    </div>
+  </div>
+
+  <div class="doc-body">
+    <div class="container">
+      <div class="doc-wrap">
+
+        <div class="doc-intro">
+          <p>These Terms of Service ("Terms") govern your access to and use of apps and services provided by newiracraft ("we", "us", or "our"), including PostEasy and any other applications we operate.</p>
+          <p>By downloading, installing, or using any of our apps, you agree to be bound by these Terms. If you do not agree, do not use our services.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>1. Eligibility</h3>
+          <p>You must be at least 13 years of age (or the minimum age required in your jurisdiction) to use our services. By using our apps you represent that you meet this requirement. If you are under 18, you confirm you have permission from a parent or guardian.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>2. Account Registration</h3>
+          <p>Some features require an account. You agree to provide accurate information, keep your credentials confidential, notify us of any unauthorised access, and accept responsibility for all activity under your account. We reserve the right to suspend or terminate accounts that violate these Terms.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>3. Subscriptions &amp; Payments</h3>
+          <ul>
+            <li>Subscriptions are billed in advance on a recurring basis (monthly or annual) via the App Store or Google Play.</li>
+            <li>Prices are displayed in Australian Dollars (AUD) where applicable and may vary by region.</li>
+            <li>Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period.</li>
+            <li>You can manage or cancel your subscription through your App Store or Google Play account settings.</li>
+            <li>Refunds are subject to the policies of Apple or Google, as applicable.</li>
+            <li>We may change pricing with reasonable notice. Continued use constitutes acceptance.</li>
+          </ul>
+        </div>
+
+        <div class="doc-sec">
+          <h3>4. Acceptable Use</h3>
+          <p>You agree not to use our services to violate any law; post false, misleading, or defamatory content; harass or harm others; attempt unauthorised access to our systems; reverse engineer our apps; use bots or scrapers; resell our services; or upload malicious code. We may suspend or terminate access for violations without notice.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>5. User Content</h3>
+          <p>You retain ownership of content you create using our apps. By using our services, you grant us a limited, non-exclusive licence to process and store your content solely to provide the service to you. You are solely responsible for content you publish. Do not submit content that is illegal, defamatory, or infringes third-party intellectual property rights.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>6. AI Features</h3>
+          <p>Our apps may include AI-powered features to assist with writing and other tasks. These features are provided as-is and for assistance purposes only. AI-generated suggestions may be inaccurate — always review content before publishing. We are not responsible for AI-generated content that you choose to publish.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>7. Intellectual Property</h3>
+          <p>All content, design, code, branding, and trademarks in our apps are owned by newiracraft or its licensors and protected by intellectual property law. You may not copy, reproduce, or distribute any part of our apps without prior written consent.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>8. Disclaimer of Warranties</h3>
+          <p>Our services are provided "as is" and "as available" without warranties of any kind, express or implied. To the fullest extent permitted by law, we disclaim all implied warranties including merchantability, fitness for a particular purpose, and non-infringement.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>9. Limitation of Liability</h3>
+          <p>To the maximum extent permitted by law, newiracraft shall not be liable for any indirect, incidental, special, consequential, or punitive damages. Our total liability for any claim shall not exceed the amount you paid us in the 12 months preceding the claim, or AUD $100, whichever is greater.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>10. Governing Law</h3>
+          <p>These Terms are governed by the laws of Queensland, Australia. Any disputes shall be subject to the exclusive jurisdiction of the courts of Queensland, Australia.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>11. Changes to These Terms</h3>
+          <p>We may update these Terms from time to time. We will notify you of material changes via in-app notification or email. Continued use after the effective date constitutes acceptance.</p>
+        </div>
+
+        <div class="doc-sec">
+          <h3>12. Contact Us</h3>
+          <div class="contact-block">
+            <strong>newiracraft</strong><br>
+            Brisbane, Queensland, Australia<br>
+            Email: <a href="mailto:legal@newiracraft.com">legal@newiracraft.com</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <span class="logo">newiracraft</span>
+    <nav class="footer-nav">
+      <a href="#home">Home</a>
+      <a href="#apps">Apps</a>
+      <a href="#support">Support</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Service</a>
+    </nav>
+    <p class="footer-copy">&copy; 2025 newiracraft. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
